@@ -34,7 +34,7 @@ public class Main {
 
         var lastAge = new ArrayList<IntVar>();
         var firstAge = new ArrayList<IntVar>();
-        for (var i = 0; i < last.size(); i++) {
+        for (int i = 0; i < last.size(); i++) {
             lastAge.add(model.newIntVar(2, 6, last.get(i)));
             firstAge.add(model.newIntVar(2, 6, first.get(i)));
         }
@@ -61,8 +61,8 @@ public class Main {
 
         if (status == OPTIMAL || status == FEASIBLE) {
             for (int i = 0; i < last.size(); i++) {
+                long age = solver.value(lastAge.get(i));
                 for (int j = 0; j < last.size(); j++) {
-                    long age = solver.value(lastAge.get(i));
                     if (age == solver.value(firstAge.get(j))) {
                         System.out.println(last.get(i) + ", " + first.get(j) + ": " + age + "y");
                     }
